@@ -1,0 +1,2815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartCampus</title>
+
+    <style>
+        /* =========================================================
+           SMARTCAMPUS - COMPLETE FRONTEND
+           All CSS is inside this file.
+           ========================================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #0f172a;
+            --background: #f5f7fb;
+            --card: #ffffff;
+            --text: #172033;
+            --muted: #64748b;
+            --border: #e2e8f0;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --danger: #dc2626;
+            --purple: #7c3aed;
+            --teal: #0d9488;
+            --soft:#f1f5f9;--soft2:#eff6ff;
+        }
+
+        body {
+            background: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* =========================================================
+           AUTHENTICATION
+           ========================================================= */
+
+        #authScreen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background:
+                radial-gradient(circle at top left, #dbeafe, transparent 35%),
+                radial-gradient(circle at bottom right, #ede9fe, transparent 35%),
+                #f8fafc;
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 1050px;
+            min-height: 650px;
+            background: var(--card);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(15, 23, 42, 0.12);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .auth-left {
+            background: linear-gradient(145deg, #1d4ed8, #2563eb, #4f46e5);
+            color: white;
+            padding: 55px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .brand-logo {
+            width: 62px;
+            height: 62px;
+            background: rgba(255,255,255,0.18);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin-bottom: 25px;
+        }
+
+        .auth-left h1 {
+            font-size: 42px;
+            margin-bottom: 16px;
+        }
+
+        .auth-left p {
+            color: #dbeafe;
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        .feature-list {
+            margin-top: 35px;
+            list-style: none;
+        }
+
+        .feature-list li {
+            margin: 15px 0;
+            color: #eff6ff;
+        }
+
+        .feature-list li span {
+            display: inline-flex;
+            width: 28px;
+            height: 28px;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.16);
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .auth-right {
+            padding: 45px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .auth-right h2 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .auth-subtitle {
+            color: var(--muted);
+            margin-bottom: 28px;
+        }
+
+        .auth-tabs {
+            display: flex;
+            background: var(--soft);
+            padding: 5px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        .auth-tab {
+            flex: 1;
+            border: none;
+            padding: 12px;
+            border-radius: 9px;
+            background: transparent;
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        .auth-tab.active {
+            background: var(--card);
+            color: var(--primary);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .role-switch {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .role-btn {
+            flex: 1;
+            padding: 11px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            border-radius: 10px;
+            color: var(--muted);
+        }
+
+        .role-btn.active {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--soft2);
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            border: 1px solid var(--border);
+            padding: 13px 14px;
+            border-radius: 10px;
+            outline: none;
+            background: var(--card);
+            transition: 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+        }
+
+        .primary-btn {
+            width: 100%;
+            border: none;
+            padding: 14px;
+            border-radius: 10px;
+            background: var(--primary);
+            color: white;
+            font-weight: 700;
+            transition: 0.2s;
+        }
+
+        .primary-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .secondary-btn {
+            border: 1px solid var(--border);
+            padding: 11px 16px;
+            border-radius: 9px;
+            background: var(--card);
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .auth-message {
+            margin-top: 15px;
+            padding: 11px;
+            border-radius: 8px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .auth-message.success {
+            display: block;
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .auth-message.error {
+            display: block;
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        /* =========================================================
+           MAIN APPLICATION
+           ========================================================= */
+
+        #app {
+            display: none;
+            min-height: 100vh;
+        }
+
+        .app-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            width: 245px;
+            background: var(--secondary);
+            color: white;
+            padding: 22px 14px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 100;
+        }
+
+        .sidebar-brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 8px 12px 28px;
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .sidebar-brand-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 11px;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin: 5px 0;
+        }
+
+        .sidebar-menu button {
+            width: 100%;
+            border: none;
+            background: transparent;
+            color: #94a3b8;
+            padding: 12px 14px;
+            border-radius: 10px;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .sidebar-menu button:hover {
+            background: #1e293b;
+            color: white;
+        }
+
+        .sidebar-menu button.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .menu-icon {
+            width: 21px;
+            text-align: center;
+        }
+
+        .sidebar-bottom {
+            position: absolute;
+            bottom: 20px;
+            left: 14px;
+            right: 14px;
+        }
+
+        .logout-btn {
+            width: 100%;
+            background: #1e293b;
+            border: none;
+            color: #cbd5e1;
+            padding: 12px;
+            border-radius: 10px;
+        }
+
+        .logout-btn:hover {
+            background: #334155;
+            color: white;
+        }
+
+        /* MAIN */
+
+        .main-content {
+            margin-left: 245px;
+            width: calc(100% - 245px);
+            min-height: 100vh;
+        }
+
+        .topbar {
+            height: 72px;
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .page-title h2 {
+            font-size: 21px;
+        }
+
+        .page-title p {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 3px;
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .notification-btn {
+            border: none;
+            background: var(--soft);
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+        }
+
+        .profile-mini {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #dbeafe;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .profile-mini span {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .page {
+            display: none;
+            padding: 30px;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* =========================================================
+           COMMON COMPONENTS
+           ========================================================= */
+
+        .welcome-banner {
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+            color: white;
+            border-radius: 18px;
+            padding: 27px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .welcome-banner h1 {
+            font-size: 27px;
+            margin-bottom: 7px;
+        }
+
+        .welcome-banner p {
+            color: #dbeafe;
+        }
+
+        .welcome-icon {
+            font-size: 65px;
+            opacity: 0.18;
+        }
+
+        .grid {
+            display: grid;
+            gap: 18px;
+        }
+
+        .grid-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        .stat-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+
+        .blue-bg {
+            background: #dbeafe;
+        }
+
+        .green-bg {
+            background: #dcfce7;
+        }
+
+        .orange-bg {
+            background: #fef3c7;
+        }
+
+        .purple-bg {
+            background: #ede9fe;
+        }
+
+        .stat-card h3 {
+            font-size: 20px;
+            margin-bottom: 3px;
+        }
+
+        .stat-card p {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 27px 0 14px;
+        }
+
+        .section-header h3 {
+            font-size: 18px;
+        }
+
+        .view-all {
+            border: none;
+            background: transparent;
+            color: var(--primary);
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* =========================================================
+           DASHBOARD
+           ========================================================= */
+
+        .next-class {
+            border-left: 4px solid var(--primary);
+        }
+
+        .next-class-top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 9px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .badge-blue {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .badge-green {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .badge-orange {
+            background: #fef3c7;
+            color: #b45309;
+        }
+
+        .class-title {
+            font-size: 21px;
+            margin-bottom: 7px;
+        }
+
+        .class-info {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .quick-action {
+            border: 1px solid var(--border);
+            background: var(--card);
+            border-radius: 12px;
+            padding: 17px;
+            text-align: left;
+            transition: 0.2s;
+        }
+
+        .quick-action:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .quick-action-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .quick-action strong {
+            display: block;
+            font-size: 14px;
+        }
+
+        .quick-action small {
+            color: var(--muted);
+            display: block;
+            margin-top: 4px;
+        }
+
+        /* =========================================================
+           TIMETABLE
+           ========================================================= */
+
+        .schedule-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .schedule-item {
+            display: grid;
+            grid-template-columns: 90px 1fr 110px;
+            align-items: center;
+            padding: 14px;
+            border: 1px solid var(--border);
+            border-radius: 11px;
+        }
+
+        .schedule-time {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .schedule-subject {
+            font-weight: 700;
+        }
+
+        .schedule-room {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* =========================================================
+           CAMPUS MAP
+           ========================================================= */
+
+        .map-layout {
+            display: grid;
+            grid-template-columns: 1fr 330px;
+            gap: 18px;
+        }
+
+        .map-container {
+            height: 540px;
+            background:
+                linear-gradient(90deg, rgba(148,163,184,0.14) 1px, transparent 1px),
+                linear-gradient(rgba(148,163,184,0.14) 1px, transparent 1px),
+                #ecfdf5;
+            background-size: 35px 35px;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .road {
+            position: absolute;
+            background: #cbd5e1;
+        }
+
+        .road.horizontal {
+            height: 30px;
+            left: 0;
+            right: 0;
+            top: 48%;
+        }
+
+        .road.vertical {
+            width: 30px;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+        }
+
+        .building {
+            position: absolute;
+            background: var(--card);
+            border: 2px solid #94a3b8;
+            border-radius: 9px;
+            padding: 9px;
+            font-size: 11px;
+            font-weight: 700;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            transition: 0.2s;
+        }
+
+        .building:hover {
+            transform: scale(1.05);
+            border-color: var(--primary);
+        }
+
+        .building.b1 {
+            left: 10%;
+            top: 12%;
+            width: 130px;
+        }
+
+        .building.b2 {
+            right: 10%;
+            top: 14%;
+            width: 125px;
+        }
+
+        .building.b3 {
+            left: 10%;
+            bottom: 14%;
+            width: 125px;
+        }
+
+        .building.b4 {
+            right: 10%;
+            bottom: 14%;
+            width: 125px;
+        }
+
+        .building.b5 {
+            left: 39%;
+            top: 7%;
+            width: 120px;
+        }
+
+        .map-pin {
+            position: absolute;
+            left: 46%;
+            top: 42%;
+            width: 34px;
+            height: 34px;
+            border-radius: 50% 50% 50% 0;
+            background: var(--danger);
+            transform: rotate(-45deg);
+            border: 3px solid white;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+
+        .map-pin::after {
+            content: "";
+            position: absolute;
+            width: 9px;
+            height: 9px;
+            background: var(--card);
+            border-radius: 50%;
+            left: 10px;
+            top: 10px;
+        }
+
+        .location-list {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .location-item {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 13px;
+            cursor: pointer;
+        }
+
+        .location-item:hover {
+            border-color: var(--primary);
+            background: #f8fafc;
+        }
+
+        .location-item strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .location-item small {
+            color: var(--muted);
+        }
+
+        /* =========================================================
+           PEER GUIDANCE
+           ========================================================= */
+
+        .search-box {
+            position: relative;
+            margin-bottom: 18px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 14px 15px 14px 42px;
+            border: 1px solid var(--border);
+            border-radius: 11px;
+            outline: none;
+        }
+
+        .search-symbol {
+            position: absolute;
+            left: 15px;
+            top: 13px;
+            color: var(--muted);
+        }
+
+        .peer-card {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .peer-avatar {
+            width: 54px;
+            height: 54px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            background: #e0e7ff;
+            color: #4338ca;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+        }
+
+        .peer-info {
+            flex: 1;
+        }
+
+        .peer-info h4 {
+            margin-bottom: 4px;
+        }
+
+        .peer-info p {
+            color: var(--muted);
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: var(--soft);
+            padding: 4px 7px;
+            border-radius: 6px;
+            font-size: 10px;
+            margin-right: 3px;
+        }
+
+        .connect-btn {
+            border: none;
+            background: var(--primary);
+            color: white;
+            padding: 9px 13px;
+            border-radius: 8px;
+            font-size: 12px;
+        }
+
+        .resource-card h4 {
+            margin-bottom: 8px;
+        }
+
+        .resource-card p {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 14px;
+        }
+
+        .resource-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* =========================================================
+           FINANCE
+           ========================================================= */
+
+        .balance-card {
+            background: linear-gradient(135deg, #0f172a, #334155);
+            color: white;
+        }
+
+        .balance-card p {
+            color: #cbd5e1;
+            font-size: 13px;
+        }
+
+        .balance-amount {
+            font-size: 35px;
+            font-weight: 800;
+            margin: 10px 0 20px;
+        }
+
+        .transaction {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 13px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .transaction:last-child {
+            border-bottom: none;
+        }
+
+        .transaction-left {
+            display: flex;
+            gap: 11px;
+            align-items: center;
+        }
+
+        .transaction-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 9px;
+            background: var(--soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .transaction-left strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .transaction-left small {
+            color: var(--muted);
+        }
+
+        .expense {
+            color: var(--danger);
+            font-weight: 700;
+        }
+
+        .income {
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        /* =========================================================
+           WELLBEING
+           ========================================================= */
+
+        .mood-options {
+            display: flex;
+            gap: 10px;
+            margin: 18px 0;
+        }
+
+        .mood {
+            flex: 1;
+            border: 1px solid var(--border);
+            background: var(--card);
+            border-radius: 10px;
+            padding: 13px 5px;
+            font-size: 23px;
+        }
+
+        .mood:hover,
+        .mood.selected {
+            border-color: var(--primary);
+            background: var(--soft2);
+        }
+
+        .wellbeing-tip {
+            border-left: 4px solid var(--teal);
+            background: #f0fdfa;
+        }
+
+        .wellbeing-tip h4 {
+            color: #115e59;
+            margin-bottom: 7px;
+        }
+
+        .wellbeing-tip p {
+            color: #134e4a;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        /* =========================================================
+           PROFILE
+           ========================================================= */
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 20px;
+        }
+
+        .profile-large-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #dbeafe;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 800;
+        }
+
+        .profile-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .detail-box {
+            background: #f8fafc;
+            padding: 14px;
+            border-radius: 10px;
+        }
+
+        .detail-box small {
+            display: block;
+            color: var(--muted);
+            margin-bottom: 5px;
+        }
+
+        .detail-box strong {
+            font-size: 14px;
+        }
+
+        /* =========================================================
+           NOTIFICATION
+           ========================================================= */
+
+        .notification-panel {
+            position: fixed;
+            top: 70px;
+            right: 20px;
+            width: 330px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            box-shadow: 0 15px 40px rgba(15,23,42,0.15);
+            padding: 15px;
+            z-index: 200;
+            display: none;
+        }
+
+        .notification-panel.show {
+            display: block;
+        }
+
+        .notification-item {
+            padding: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+
+        .notification-item strong {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+
+        .notification-item p {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        /* =========================================================
+           MOBILE BOTTOM NAV
+           ========================================================= */
+
+        .mobile-nav {
+            display: none;
+        }
+
+        /* =========================================================
+           MODAL
+           ========================================================= */
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15,23,42,0.55);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 500;
+            padding: 20px;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--card);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 500px;
+            padding: 25px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .close-modal {
+            border: none;
+            background: var(--soft);
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+        }
+
+        /* =========================================================
+           RESPONSIVE
+           ========================================================= */
+
+        @media (max-width: 1000px) {
+
+            .grid-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .quick-actions {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .map-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 800px) {
+
+            .auth-container {
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
+
+            .auth-left {
+                display: none;
+            }
+
+            .auth-right {
+                padding: 30px 22px;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+                padding-bottom: 75px;
+            }
+
+            .topbar {
+                padding: 0 17px;
+            }
+
+            .page {
+                padding: 18px;
+            }
+
+            .grid-4,
+            .grid-3,
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome-banner {
+                padding: 21px;
+            }
+
+            .welcome-icon {
+                display: none;
+            }
+
+            .profile-mini span {
+                display: none;
+            }
+
+            .mobile-nav {
+                position: fixed;
+                display: flex;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 65px;
+                background: var(--card);
+                border-top: 1px solid var(--border);
+                z-index: 150;
+                justify-content: space-around;
+                align-items: center;
+            }
+
+            .mobile-nav button {
+                border: none;
+                background: transparent;
+                color: var(--muted);
+                font-size: 10px;
+                display: flex;
+                flex-direction: column;
+                gap: 3px;
+                align-items: center;
+            }
+
+            .mobile-nav button.active {
+                color: var(--primary);
+                font-weight: 700;
+            }
+
+            .mobile-nav span {
+                font-size: 21px;
+            }
+
+            .schedule-item {
+                grid-template-columns: 75px 1fr;
+                gap: 8px;
+            }
+
+            .schedule-room {
+                grid-column: 2;
+            }
+
+            .profile-details {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* =========================================================
+           FACULTY + CLASSROOM MANAGEMENT
+           ========================================================= */
+        .faculty-only { display: none; }
+        .faculty-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+        .room-card { position:relative; }
+        .room-card h4 { font-size:17px; margin-bottom:6px; }
+        .room-meta { color:var(--muted); font-size:12px; line-height:1.7; }
+        .room-tags { margin-top:10px; display:flex; flex-wrap:wrap; gap:6px; }
+        .room-tag { background: var(--soft); padding:5px 8px; border-radius:7px; font-size:11px; }
+        .faculty-action { display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
+        .faculty-action .secondary-btn, .faculty-action .primary-btn { width:auto; }
+        .request-row { display:flex; justify-content:space-between; align-items:center; gap:15px; padding:14px 0; border-bottom:1px solid var(--border); }
+        .request-row:last-child { border-bottom:none; }
+        .status-pill { padding:5px 9px; border-radius:20px; font-size:11px; font-weight:700; }
+        .status-pending { background:#fef3c7; color:#92400e; }
+        .status-approved { background:#dcfce7; color:#166534; }
+        .status-declined { background:#fee2e2; color:#991b1b; }
+        .form-grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+        .check-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:8px; }
+        .check-grid label { font-size:12px; color:var(--muted); display:flex; gap:7px; align-items:center; }
+        @media(max-width:900px){ .faculty-grid{grid-template-columns:1fr 1fr;} }
+        @media(max-width:650px){ .faculty-grid,.form-grid-2{grid-template-columns:1fr;} }
+
+        /* SHARED RESOURCE HUB */
+        .resource-hub-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;flex-wrap:wrap;margin-bottom:18px;}
+        .resource-hub-tools{display:grid;grid-template-columns:2fr 1fr;gap:10px;margin-bottom:18px;}
+        .resource-hub-tools input,.resource-hub-tools select{width:100%;padding:12px 13px;border:1px solid var(--border);border-radius:10px;outline:none;background: var(--card);}
+        .shared-resource-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+        .shared-resource-card{background: var(--card);border:1px solid var(--border);border-radius:15px;padding:18px;display:flex;flex-direction:column;min-height:230px;}
+        .shared-resource-card h4{font-size:16px;margin:10px 0 7px;}
+        .shared-resource-card p{color:var(--muted);font-size:12px;line-height:1.55;}
+        .resource-meta{display:flex;gap:7px;flex-wrap:wrap;margin:11px 0;}
+        .resource-meta span{background: var(--soft);padding:5px 8px;border-radius:7px;font-size:10px;color:#475569;}
+        .resource-card-bottom{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:8px;}
+        .resource-actions{display:flex;gap:7px;align-items:center;}
+        .resource-actions button{padding:7px 10px;font-size:11px;width:auto;}
+        .resource-upload{margin-top:22px;}
+        .resource-upload summary{cursor:pointer;font-weight:700;color:var(--primary);}
+        .resource-empty{text-align:center;padding:45px;color:var(--muted);grid-column:1/-1;}
+        @media(max-width:1000px){.shared-resource-grid{grid-template-columns:repeat(2,1fr);}}
+        @media(max-width:650px){.shared-resource-grid,.resource-hub-tools{grid-template-columns:1fr;}.resource-hub-head{display:block;}.resource-hub-head .primary-btn{margin-top:12px;}}
+    
+/* ===== HACKATHON POLISH ===== */
+.year-chips{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}
+.chip{border:1px solid var(--border);background:var(--card);color:var(--muted);padding:8px 14px;border-radius:999px;font-weight:600;font-size:13px}
+.chip.active{background:var(--primary);border-color:var(--primary);color:#fff}
+.year-badge{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--soft2);color:var(--primary);margin-left:6px}
+.peer-actions{display:flex;flex-direction:column;gap:6px}
+.peer-del{border:1px solid var(--border);background:transparent;color:var(--danger);border-radius:8px;padding:6px 10px;font-size:12px}
+.peer-res{font-size:12px;color:var(--muted);margin:4px 0 6px}
+:root[data-theme="dark"]{--background:#0b1220;--card:#131c2e;--text:#e6ecf5;--muted:#94a3b8;--border:#233049;--soft:#1b2740;--soft2:#17284a;--secondary:#e6ecf5}
+:root[data-theme="dark"] #authScreen{background:radial-gradient(circle at top left,#1e2a52,transparent 40%),radial-gradient(circle at bottom right,#2b1f52,transparent 40%),#0b1220}
+:root[data-theme="dark"] input,:root[data-theme="dark"] select,:root[data-theme="dark"] textarea{background:var(--soft);color:var(--text);border-color:var(--border)}
+body,.card,.topbar,.sidebar,.auth-container,input,select,textarea{transition:background .25s,color .25s,border-color .25s}
+.card,.shared-resource-card,.peer-card,.room-card{transition:transform .2s,box-shadow .2s}
+.card:hover,.shared-resource-card:hover,.peer-card:hover,.room-card:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(15,23,42,.14)}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid rgba(37,99,235,.45);outline-offset:2px}
+.page.active{animation:pgIn .35s ease}
+@keyframes pgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.theme-btn{border:1px solid var(--border);background:var(--card);color:var(--text);width:42px;height:42px;border-radius:12px;font-size:18px}
+.sync-badge{font-size:12px;font-weight:700;padding:6px 10px;border-radius:999px;background:var(--soft);color:var(--muted)}
+.sync-badge.live{background:#dcfce7;color:#166534}
+#toastBox{position:fixed;right:18px;bottom:18px;z-index:9999;display:flex;flex-direction:column;gap:10px}
+.toast{background:#0f172a;color:#fff;padding:12px 16px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.3);max-width:320px;white-space:pre-line;font-size:14px;animation:pgIn .25s ease}
+@media(max-width:650px){.sync-badge{display:none}}
+</style>
+
+    <!-- Supabase JS Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>try{var t=localStorage.getItem("sc_theme")||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+
+<body>
+<div id="toastBox" aria-live="polite"></div>
+
+<!-- AUTHENTICATION SCREEN -->
+<div id="authScreen">
+    <div class="auth-container">
+        <div class="auth-left">
+            <div class="brand-logo">🎓</div>
+            <h1>SmartCampus</h1>
+            <p>One unified platform for students to manage academics, campus navigation, peers, finances and wellbeing.</p>
+            <ul class="feature-list">
+                <li><span>🗺️</span> Find classrooms and campus locations</li>
+                <li><span>📚</span> Manage your academic schedule</li>
+                <li><span>🤝</span> Connect with helpful peers</li>
+                <li><span>💰</span> Track your student finances</li>
+                <li><span>🧠</span> Take care of your wellbeing</li>
+            </ul>
+        </div>
+
+        <div class="auth-right">
+            <h2 id="authTitle">Welcome Back</h2>
+            <p class="auth-subtitle" id="authSubtitle">Login to your SmartCampus account</p>
+
+            <div class="auth-tabs">
+                <button class="auth-tab active" id="loginTab" onclick="showLogin()">Login</button>
+                <button class="auth-tab" id="registerTab" onclick="showRegister()">Register</button>
+            </div>
+
+            <div class="role-switch">
+                <button class="role-btn active" id="studentRole" onclick="selectRole('student')">🎓 Student</button>
+                <button class="role-btn" id="facultyRole" onclick="selectRole('faculty')">👨‍🏫 Faculty</button>
+            </div>
+
+            <!-- LOGIN FORM -->
+            <form id="loginForm" onsubmit="login(event)">
+                <div class="form-group">
+                    <label>Email / College ID</label>
+                    <input type="text" id="loginId" placeholder="Enter your email or college ID" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter password" required>
+                </div>
+                <button class="primary-btn" type="submit">Login</button>
+            </form>
+
+            <!-- REGISTER FORM -->
+            <form id="registerForm" onsubmit="registerUser(event)" style="display:none;">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="regName" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label>College ID</label>
+                    <input type="text" id="regCollegeId" placeholder="Example: SUIIT2026001" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="regEmail" placeholder="student@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Department</label>
+                    <select id="regDepartment" required>
+                        <option value="">Select Department</option>
+                        <option>CSE</option>
+                        <option>ECE</option>
+                        <option>EE</option>
+                        <option>Mechanical</option>
+                        <option>Civil</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Year</label>
+                    <select id="regYear" required>
+                        <option value="">Select Year</option>
+                        <option>1st Year</option>
+                        <option>2nd Year</option>
+                        <option>3rd Year</option>
+                        <option>4th Year</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="regPassword" placeholder="Create password" required>
+                </div>
+                <button class="primary-btn" type="submit">Create Account</button>
+            </form>
+
+            <div id="authMessage" class="auth-message"></div>
+        </div>
+    </div>
+</div>
+
+<!-- MAIN APPLICATION -->
+<div id="app">
+    <div class="app-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="sidebar-brand-icon">🎓</div>
+                SmartCampus
+            </div>
+
+            <ul class="sidebar-menu" id="studentMenu">
+                <li><button class="active" onclick="navigate('home', this)"><span class="menu-icon">🏠</span>Home</button></li>
+                <li><button onclick="navigate('map', this)"><span class="menu-icon">🗺️</span>Campus Map</button></li>
+                <li><button onclick="navigate('academics', this)"><span class="menu-icon">📚</span>Academics</button></li>
+                <li><button onclick="navigate('peers', this)"><span class="menu-icon">🤝</span>Peer Guidance</button></li>
+                <li><button onclick="navigate('resources', this)"><span class="menu-icon">📚</span>Resource Hub</button></li>
+                <li><button onclick="navigate('finance', this)"><span class="menu-icon">💰</span>Finance</button></li>
+                <li><button onclick="navigate('wellbeing', this)"><span class="menu-icon">🧠</span>Wellbeing</button></li>
+                <li><button onclick="navigate('profile', this)"><span class="menu-icon">👤</span>Profile</button></li>
+            </ul>
+
+            <ul class="sidebar-menu faculty-only" id="facultyMenu">
+                <li><button class="active" onclick="navigate('facultyHome', this)"><span class="menu-icon">🏠</span>Dashboard</button></li>
+                <li><button onclick="navigate('facultyAcademics', this)"><span class="menu-icon">📅</span>My Timetable</button></li>
+                <li><button onclick="navigate('extraClass', this)"><span class="menu-icon">➕</span>Extra Class</button></li>
+                <li><button onclick="navigate('resources', this)"><span class="menu-icon">📚</span>Resource Hub</button></li>
+                <li><button onclick="navigate('classrooms', this)"><span class="menu-icon">🏫</span>Classrooms</button></li>
+                <li><button onclick="navigate('profile', this)"><span class="menu-icon">👤</span>Profile</button></li>
+            </ul>
+
+            <div class="sidebar-bottom">
+                <button class="logout-btn" onclick="logout()">🚪 &nbsp; Logout</button>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+            <!-- TOP BAR -->
+            <header class="topbar">
+                <div class="page-title">
+                    <h2 id="pageTitle">Dashboard</h2>
+                    <p id="pageSubtitle">Your campus at a glance</p>
+                </div>
+
+                <div class="topbar-right">
+                    <span class="sync-badge" id="syncBadge">Demo mode</span>
+                    <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" title="Toggle light/dark">🌙</button>
+                    <button class="notification-btn" onclick="toggleNotifications()">🔔</button>
+                    <div class="profile-mini">
+                        <div class="avatar" id="topAvatar">U</div>
+                        <span id="topUserName">Student</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- NOTIFICATIONS -->
+            <div class="notification-panel" id="notificationPanel">
+                <div class="notification-item">
+                    <strong>📚 Upcoming class</strong>
+                    <p>Engineering Mathematics starts at 11:00 AM.</p>
+                </div>
+                <div class="notification-item">
+                    <strong>📢 Campus announcement</strong>
+                    <p>E-Summit registration closes soon.</p>
+                </div>
+                <div class="notification-item">
+                    <strong>🤝 Peer request</strong>
+                    <p>Rahul shared a DSA resource with you.</p>
+                </div>
+            </div>
+
+            <!-- HOME -->
+            <section class="page active" id="page-home">
+                <div class="welcome-banner">
+                    <div>
+                        <h1><span class="greet">Good morning</span>, <span id="welcomeName">Student</span> 👋</h1>
+                        <p>Here's what's happening around your campus today.</p>
+                    </div>
+                    <div class="welcome-icon">🎓</div>
+                </div>
+
+                <div class="grid grid-4">
+                    <div class="card stat-card">
+                        <div class="stat-icon blue-bg">📚</div>
+                        <div>
+                            <h3 id="statClasses">4</h3>
+                            <p>Classes Today</p>
+                        </div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-icon green-bg">💰</div>
+                        <div>
+                            <h3 id="statBalance">₹2,450</h3>
+                            <p>Balance</p>
+                        </div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-icon orange-bg">🤝</div>
+                        <div>
+                            <h3 id="statPeerResources">12</h3>
+                            <p>Peer Resources</p>
+                        </div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-icon purple-bg">🧠</div>
+                        <div>
+                            <h3>Good</h3>
+                            <p>Wellbeing</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-header">
+                    <h3>Next Class</h3>
+                    <button class="view-all" onclick="navigateByName('academics')">View timetable →</button>
+                </div>
+
+                <div class="card next-class">
+                    <div class="next-class-top">
+                        <span class="badge badge-blue">UPCOMING</span>
+                        <span>10:00 AM</span>
+                    </div>
+                    <div class="class-title">Engineering Mathematics</div>
+                    <div class="class-info">📍 Room 204 &nbsp; • &nbsp; 🧑‍🏫 Dr. Sharma</div>
+                </div>
+
+                <div class="section-header">
+                    <h3>Quick Actions</h3>
+                </div>
+
+                <div class="quick-actions">
+                    <button class="quick-action" onclick="navigateByName('map')">
+                        <div class="quick-action-icon">🗺️</div>
+                        <strong>Find Classroom</strong>
+                        <small>Navigate around campus</small>
+                    </button>
+                    <button class="quick-action" onclick="navigateByName('peers')">
+                        <div class="quick-action-icon">🤝</div>
+                        <strong>Find a Peer</strong>
+                        <small>Get academic guidance</small>
+                    </button>
+                    <button class="quick-action" onclick="navigateByName('finance')">
+                        <div class="quick-action-icon">💰</div>
+                        <strong>Check Finance</strong>
+                        <small>View expenses</small>
+                    </button>
+                    <button class="quick-action" onclick="navigateByName('wellbeing')">
+                        <div class="quick-action-icon">🧠</div>
+                        <strong>Wellbeing Check</strong>
+                        <small>Track your mood</small>
+                    </button>
+                </div>
+
+                <div class="section-header">
+                    <h3>Today's Classes</h3>
+                </div>
+
+                <div class="card">
+                    <div class="schedule-list">
+                        <div class="schedule-item">
+                            <div class="schedule-time">10:00 AM</div>
+                            <div><div class="schedule-subject">Engineering Mathematics</div></div>
+                            <div class="schedule-room">Room 204</div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">12:00 PM</div>
+                            <div><div class="schedule-subject">Programming in C</div></div>
+                            <div class="schedule-room">Lab 2</div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">2:00 PM</div>
+                            <div><div class="schedule-subject">Communication English</div></div>
+                            <div class="schedule-room">Room 103</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CAMPUS MAP -->
+            <section class="page" id="page-map">
+                <div class="section-header">
+                    <div>
+                        <h3>Campus Map</h3>
+                        <p style="color:var(--muted);font-size:13px;margin-top:4px;">Find buildings, classrooms and important locations.</p>
+                    </div>
+                </div>
+
+                <div class="map-layout">
+                    <div class="card">
+                        <div class="map-container">
+                            <div class="road horizontal"></div>
+                            <div class="road vertical"></div>
+                            <div class="building b1" onclick="showLocation('Academic Block')">🏢<br>Academic Block</div>
+                            <div class="building b2" onclick="showLocation('Central Library')">📚<br>Central Library</div>
+                            <div class="building b3" onclick="showLocation('Hostel')">🏠<br>Hostel</div>
+                            <div class="building b4" onclick="showLocation('Canteen')">🍴<br>Canteen</div>
+                            <div class="building b5" onclick="showLocation('Admin Block')">🏛️<br>Admin Block</div>
+                            <div class="map-pin"></div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="margin-bottom:14px;">Campus Locations</h3>
+                        <div class="location-list">
+                            <div class="location-item" onclick="showLocation('Academic Block')">
+                                <strong>🏢 Academic Block</strong>
+                                <small>Classrooms • Labs • Faculty rooms</small>
+                            </div>
+                            <div class="location-item" onclick="showLocation('Central Library')">
+                                <strong>📚 Central Library</strong>
+                                <small>Books • Reading room • Digital library</small>
+                            </div>
+                            <div class="location-item" onclick="showLocation('Admin Block')">
+                                <strong>🏛️ Admin Block</strong>
+                                <small>Administration • Accounts • Office</small>
+                            </div>
+                            <div class="location-item" onclick="showLocation('Hostel')">
+                                <strong>🏠 Hostel</strong>
+                                <small>Student accommodation</small>
+                            </div>
+                            <div class="location-item" onclick="showLocation('Canteen')">
+                                <strong>🍴 Canteen</strong>
+                                <small>Food • Refreshments</small>
+                            </div>
+                            <div class="location-item" onclick="showLocation('Sports Complex')">
+                                <strong>🏟️ Sports Complex</strong>
+                                <small>Sports • Gym • Activities</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ACADEMICS -->
+            <section class="page" id="page-academics">
+                <div class="section-header">
+                    <div>
+                        <h3>Academic Schedule</h3>
+                        <p style="color:var(--muted);font-size:13px;margin-top:4px;">Manage your timetable and upcoming classes.</p>
+                    </div>
+                    <button class="secondary-btn" onclick="openAddClassModal()">+ Add Class</button>
+                </div>
+
+                <div class="card">
+                    <div class="schedule-list" id="fullSchedule"></div>
+                </div>
+            </section>
+
+            <!-- PEER GUIDANCE -->
+            <section class="page" id="page-peers">
+                <div class="section-header">
+                    <div>
+                        <h3>Peer Guidance</h3>
+                        <p style="color:var(--muted);font-size:13px;margin-top:4px;">Learn from students who have already been there.</p>
+                    </div>
+                    <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="primary-btn" style="width:auto;" onclick="openAddPeerModal()">＋ Add Student</button><button class="secondary-btn" onclick="openPeerModal()">Share Resource</button></div>
+                </div>
+
+                <div class="search-box">
+                    <span class="search-symbol">🔍</span>
+                    <input type="text" id="peerSearch" placeholder="Search name, branch, year, skills..." oninput="searchPeers()">
+                </div>
+
+                <div class="year-chips" id="peerYearChips">
+                    <button class="chip active" onclick="setPeerYear('all',this)">All</button>
+                    <button class="chip" onclick="setPeerYear('2nd Year',this)">2nd Year</button>
+                    <button class="chip" onclick="setPeerYear('3rd Year',this)">3rd Year</button>
+                    <button class="chip" onclick="setPeerYear('4th Year',this)">4th Year</button>
+                </div>
+                <div class="grid grid-2" id="peerGrid"></div>
+            </section>
+
+            <!-- FINANCE -->
+            <section class="page" id="page-finance">
+                <div class="section-header">
+                    <div>
+                        <h3>Student Finance</h3>
+                        <p style="color:var(--muted);font-size:13px;margin-top:4px;">Keep track of your student expenses.</p>
+                    </div>
+                    <button class="primary-btn" style="width:auto;" onclick="openTransactionModal()">+ Add Transaction</button>
+                </div>
+
+                <div class="grid grid-3">
+                    <div class="card balance-card">
+                        <p>Available Balance</p>
+                        <div class="balance-amount" id="financeBalance">₹0</div>
+                        <small>Updated today</small>
+                    </div>
+                    <div class="card">
+                        <p style="color:var(--muted);font-size:13px;">Monthly Expenses</p>
+                        <h2 style="margin-top:10px;" id="financeExpenses">₹0</h2>
+                        <p style="color:var(--danger);font-size:12px;margin-top:8px;">↓ 8% from last month</p>
+                    </div>
+                    <div class="card">
+                        <p style="color:var(--muted);font-size:13px;">Savings</p>
+                        <h2 style="margin-top:10px;" id="financeSavings">₹0</h2>
+                        <p style="color:var(--success);font-size:12px;margin-top:8px;">↑ 12% from last month</p>
+                    </div>
+                </div>
+
+                <div class="section-header">
+                    <h3>Recent Transactions</h3>
+                </div>
+
+                <div class="card">
+                    <div id="transactionList"></div>
+                </div>
+            </section>
+
+            <!-- WELLBEING -->
+            <section class="page" id="page-wellbeing">
+                <div class="section-header">
+                    <div>
+                        <h3>Wellbeing</h3>
+                        <p style="color:var(--muted);font-size:13px;margin-top:4px;">Your mental wellbeing matters.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-2">
+                    <div class="card">
+                        <h3>How are you feeling today?</h3>
+                        <p style="color:var(--muted);font-size:13px;margin-top:5px;">Select your current mood.</p>
+                        <div class="mood-options">
+                            <button class="mood" onclick="selectMood(this,'Very Good')">😄</button>
+                            <button class="mood" onclick="selectMood(this,'Good')">🙂</button>
+                            <button class="mood" onclick="selectMood(this,'Okay')">😐</button>
+                            <button class="mood" onclick="selectMood(this,'Low')">😔</button>
+                            <button class="mood" onclick="selectMood(this,'Stressed')">😣</button>
+                        </div>
+                        <div id="moodMessage" style="font-size:13px;color:var(--muted);">Your response is private in this demo.</div>
+                    </div>
+
+                    <div class="card wellbeing-tip">
+                        <h4>🌱 Today's Wellbeing Tip</h4>
+                        <p>Take a short break between study sessions. A 5–10 minute walk, some water and a few deep breaths can help you reset your focus.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Study Balance</h3>
+                        <div style="margin-top:18px;">
+                            <div style="display:flex;justify-content:space-between;font-size:13px;">
+                                <span>Study</span>
+                                <strong>72%</strong>
+                            </div>
+                            <div style="height:8px;background:#e2e8f0;border-radius:20px;margin-top:7px;">
+                                <div style="width:72%;height:100%;background:#2563eb;border-radius:20px;"></div>
+                            </div>
+                        </div>
+                        <div style="margin-top:18px;">
+                            <div style="display:flex;justify-content:space-between;font-size:13px;">
+                                <span>Rest</span>
+                                <strong>58%</strong>
+                            </div>
+                            <div style="height:8px;background:#e2e8f0;border-radius:20px;margin-top:7px;">
+                                <div style="width:58%;height:100%;background:#16a34a;border-radius:20px;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Need Support?</h3>
+                        <p style="color:var(--muted);font-size:13px;line-height:1.6;margin:12px 0;">If you are feeling overwhelmed, reach out to someone you trust or your college support service.</p>
+                        <button class="secondary-btn" onclick="showSupportMessage()">Find Support</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SHARED RESOURCE HUB -->
+            <section class="page" id="page-resources">
+                <div class="resource-hub-head">
+                    <div>
+                        <h3>📚 Shared Resource Hub</h3>
+                        <p style="color:var(--muted);font-size:13px;margin-top:4px;">One shared library for students and faculty.</p>
+                    </div>
+                    <button class="primary-btn" style="width:auto;" onclick="document.getElementById('resourceUpload').open=true;">+ Share Resource</button>
+                </div>
+                <div class="resource-hub-tools">
+                    <input id="resourceSearch" placeholder="Search resources, subjects, authors..." oninput="renderSharedResources()">
+                    <select id="resourceCategory" onchange="renderSharedResources()">
+                        <option value="all">All Categories</option>
+                        <option>Notes</option>
+                        <option>Assignment</option>
+                        <option>Lab Manual</option>
+                        <option>Previous Questions</option>
+                        <option>Project</option>
+                        <option>Code</option>
+                        <option>Reference</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="card" style="padding:14px;margin-bottom:18px;">
+                    <strong>Shared campus library</strong>
+                    <span style="color:var(--muted);font-size:12px;margin-left:8px;">Students and faculty use the same resource collection.</span>
+                </div>
+                <div class="shared-resource-grid" id="sharedResourceGrid"></div>
+                <details class="card resource-upload" id="resourceUpload">
+                    <summary>Upload / Share a new resource</summary>
+                    <form onsubmit="addSharedResource(event)">
+                        <div class="form-grid-2">
+                            <div class="form-group"><label>Resource Title</label><input id="sharedTitle" required placeholder="e.g. Data Structures Unit 3 Notes"></div>
+                            <div class="form-group"><label>Category</label><select id="sharedCategory" required><option>Notes</option><option>Assignment</option><option>Lab Manual</option><option>Previous Questions</option><option>Project</option><option>Code</option><option>Reference</option><option>Other</option></select></div>
+                            <div class="form-group"><label>Subject</label><input id="sharedSubject" required placeholder="e.g. Programming in C"></div>
+                            <div class="form-group"><label>Semester</label><input id="sharedSemester" placeholder="e.g. 1st Semester"></div>
+                            <div class="form-group"><label>Branch</label><input id="sharedBranch" placeholder="e.g. CSE"></div>
+                            <div class="form-group"><label>Resource Link (optional)</label><input id="sharedLink" type="url" placeholder="https://..."></div>
+                        </div>
+                        <div class="form-group"><label>Description</label><textarea id="sharedDescription" rows="3" placeholder="What does this resource contain?"></textarea></div>
+                        <div class="form-group"><label>Share With</label><select id="sharedVisibility"><option value="Everyone">Everyone — Students + Faculty</option><option value="Students">Students</option><option value="Faculty">Faculty</option></select></div>
+                        <button class="primary-btn" style="width:auto;" type="submit">Share Resource</button>
+                    </form>
+                </details>
+            </section>
+
+            <!-- FACULTY DASHBOARD -->
+            <section class="page" id="page-facultyHome">
+                <div class="welcome-banner">
+                    <div>
+                        <h1><span class="greet">Good morning</span>, <span id="facultyWelcomeName">Faculty</span> 👋</h1>
+                        <p>Manage classes, rooms and extra-class requests.</p>
+                    </div>
+                    <div class="welcome-icon">👨‍🏫</div>
+                </div>
+
+                <div class="faculty-grid">
+                    <div class="card stat-card"><div class="stat-icon blue-bg">📚</div><div><h3 id="facClasses">0</h3><p>Today's Classes</p></div></div>
+                    <div class="card stat-card"><div class="stat-icon orange-bg">➕</div><div><h3 id="facRequests">0</h3><p>Pending Requests</p></div></div>
+                    <div class="card stat-card"><div class="stat-icon green-bg">🏫</div><div><h3 id="facRooms">0</h3><p>Rooms Available</p></div></div>
+                </div>
+
+                <div class="section-header"><h3>Today's Schedule</h3><button class="view-all" onclick="navigateByName('facultyAcademics')">View timetable →</button></div>
+                <div class="card"><div class="schedule-list" id="facultyTodayList"></div></div>
+
+                <div class="section-header"><h3>Room Requests</h3></div>
+                <div class="card" id="roomRequestList"></div>
+            </section>
+
+            <!-- FACULTY TIMETABLE -->
+            <section class="page" id="page-facultyAcademics">
+                <div class="section-header"><div><h3>My Timetable</h3><p style="color:var(--muted);font-size:13px;margin-top:4px;">Your teaching schedule.</p></div><button class="secondary-btn" onclick="navigateByName('extraClass')">+ Extra Class</button></div>
+                <div class="card"><div class="schedule-list" id="facultyTimetableList"></div></div>
+            </section>
+
+            <!-- EXTRA CLASS -->
+            <section class="page" id="page-extraClass">
+                <div class="section-header"><div><h3>Request Extra Class</h3><p style="color:var(--muted);font-size:13px;margin-top:4px;">SmartCampus will suggest a suitable room and time.</p></div></div>
+                <div class="card">
+                    <form onsubmit="submitExtraClass(event)">
+                        <div class="form-grid-2">
+                            <div class="form-group"><label>Subject</label><input id="extraSubject" required placeholder="e.g. Engineering Mathematics"></div>
+                            <div class="form-group"><label>Students</label><input id="extraStudents" type="number" min="1" required placeholder="60"></div>
+                            <div class="form-group"><label>Preferred Date</label><input id="extraDate" type="date" required></div>
+                            <div class="form-group"><label>Preferred Time</label><input id="extraTime" type="time" required></div>
+                        </div>
+                        <div class="form-group"><label>Preferred Room (optional)</label><input id="extraRoom" placeholder="e.g. Room 204"></div>
+                        <button class="primary-btn" style="width:auto;" type="submit">Find & Request Room</button>
+                    </form>
+                    <div id="extraClassResult" style="margin-top:15px;"></div>
+                </div>
+            </section>
+
+            <!-- CLASSROOM MANAGEMENT -->
+            <section class="page" id="page-classrooms">
+                <div class="section-header"><div><h3>Classroom Details</h3><p style="color:var(--muted);font-size:13px;margin-top:4px;">Add capacity, equipment and room availability.</p></div><button class="primary-btn" style="width:auto;" onclick="openClassroomModal()">+ Add Classroom</button></div>
+                <div class="grid grid-2" id="classroomGrid"></div>
+            </section>
+
+            <!-- PROFILE -->
+            <section class="page" id="page-profile">
+                <div class="card">
+                    <div class="profile-header">
+                        <div class="profile-large-avatar" id="profileAvatar">U</div>
+                        <div>
+                            <h2 id="profileName">Student</h2>
+                            <p id="profileRole" style="color:var(--muted);margin-top:5px;">Student</p>
+                        </div>
+                    </div>
+
+                    <div class="profile-details">
+                        <div class="detail-box">
+                            <small>College ID</small>
+                            <strong id="profileCollegeId">—</strong>
+                        </div>
+                        <div class="detail-box">
+                            <small>Email</small>
+                            <strong id="profileEmail">—</strong>
+                        </div>
+                        <div class="detail-box">
+                            <small>Department</small>
+                            <strong id="profileDepartment">—</strong>
+                        </div>
+                        <div class="detail-box">
+                            <small>Year</small>
+                            <strong id="profileYear">—</strong>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- MOBILE NAV -->
+    <nav class="mobile-nav">
+        <button class="active" onclick="navigateByName('home')"><span>🏠</span>Home</button>
+        <button onclick="navigateByName('map')"><span>🗺️</span>Map</button>
+        <button onclick="navigateByName('academics')"><span>📚</span>Study</button>
+        <button onclick="navigateByName('peers')"><span>🤝</span>Peers</button>
+        <button onclick="navigateByName('finance')"><span>💰</span>Money</button>
+    </nav>
+</div>
+
+<!-- MODALS -->
+
+<!-- LOCATION MODAL -->
+<div class="modal-overlay" id="locationModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h3 id="locationTitle">Location</h3>
+            <button class="close-modal" onclick="closeModal('locationModal')">✕</button>
+        </div>
+        <p id="locationDescription" style="color:var(--muted);line-height:1.6;"></p>
+        <button class="primary-btn" style="margin-top:20px;" onclick="closeModal('locationModal')">Got it</button>
+    </div>
+</div>
+
+<!-- ADD CLASS MODAL -->
+<div class="modal-overlay" id="classModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h3>Add Class</h3>
+            <button class="close-modal" onclick="closeModal('classModal')">✕</button>
+        </div>
+        <form onsubmit="addClass(event)">
+            <div class="form-group">
+                <label>Subject</label>
+                <input id="newSubject" required placeholder="Example: Data Structures">
+            </div>
+            <div class="form-group">
+                <label>Time</label>
+                <input id="newTime" type="time" required>
+            </div>
+            <div class="form-group">
+                <label>Room</label>
+                <input id="newRoom" placeholder="Example: Room 301" required>
+            </div>
+            <button class="primary-btn" type="submit">Add Class</button>
+        </form>
+    </div>
+</div>
+
+<!-- PEER MODAL -->
+<div class="modal-overlay" id="peerModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h3>Share Resource</h3>
+            <button class="close-modal" onclick="closeModal('peerModal')">✕</button>
+        </div>
+        <form onsubmit="addResource(event)">
+            <div class="form-group">
+                <label>Resource Title</label>
+                <input id="resourceTitle" placeholder="Example: C Programming Notes" required>
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <textarea id="resourceDescription" rows="3" placeholder="Describe your resource..." required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Category</label>
+                <input id="resourceCategoryInput" placeholder="Example: Programming" required>
+            </div>
+            <button class="primary-btn" type="submit">Share Resource</button>
+        </form>
+    </div>
+</div>
+
+<!-- ADD CLASSROOM MODAL -->
+<div class="modal-overlay" id="classroomModal">
+    <div class="modal">
+        <div class="modal-header"><h3>Add Classroom</h3><button class="close-modal" onclick="closeModal('classroomModal')">✕</button></div>
+        <form onsubmit="addClassroom(event)">
+            <div class="form-grid-2">
+                <div class="form-group"><label>Room Name / No.</label><input id="roomName" required maxlength="30" placeholder="Room 301"></div>
+                <div class="form-group"><label>Capacity</label><input id="roomCap" type="number" min="1" max="500" required placeholder="60"></div>
+            </div>
+            <div class="form-group"><label>Equipment (comma separated)</label><input id="roomEquip" placeholder="Projector, Whiteboard, AC"></div>
+            <button class="primary-btn" type="submit">Add Classroom</button>
+        </form>
+    </div>
+</div>
+
+<!-- ADD STUDENT (PEER) MODAL -->
+<div class="modal-overlay" id="addPeerModal">
+    <div class="modal">
+        <div class="modal-header"><h3>Add Student to Peer Guidance</h3><button class="close-modal" onclick="closeModal('addPeerModal')">✕</button></div>
+        <form onsubmit="addPeerStudent(event)">
+            <div class="form-group"><label>Student Name</label><input id="peerName" required maxlength="80" placeholder="Example: Priya Sharma"></div>
+            <div class="form-grid-2">
+                <div class="form-group"><label>Branch</label><input id="peerDept" required maxlength="40" placeholder="CSE / ECE / ME"></div>
+                <div class="form-group"><label>Year</label><select id="peerYear"><option selected>2nd Year</option><option>3rd Year</option><option>4th Year</option></select></div>
+            </div>
+            <div class="form-group"><label>Skills (comma separated)</label><input id="peerSkills" required placeholder="Python, DSA, Web Dev"></div>
+            <div class="form-group"><label>Can help with (resource / topic)</label><input id="peerResourceTitle" maxlength="120" placeholder="Example: DSA interview notes"></div>
+            <div class="form-group"><label>Contact (optional)</label><input id="peerContact" maxlength="80" placeholder="Email or phone"></div>
+            <button class="primary-btn" type="submit">Add Student</button>
+        </form>
+    </div>
+</div>
+
+<!-- TRANSACTION MODAL -->
+<div class="modal-overlay" id="transactionModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h3>Add Transaction</h3>
+            <button class="close-modal" onclick="closeModal('transactionModal')">✕</button>
+        </div>
+        <form onsubmit="addTransaction(event)">
+            <div class="form-group">
+                <label>Description</label>
+                <input id="transactionDescription" placeholder="Example: Canteen" required>
+            </div>
+            <div class="form-group">
+                <label>Amount</label>
+                <input id="transactionAmount" type="number" min="1" placeholder="Enter amount" required>
+            </div>
+            <div class="form-group">
+                <label>Type</label>
+                <select id="transactionType">
+                    <option value="expense">Expense</option>
+                    <option value="income">Income</option>
+                </select>
+            </div>
+            <button class="primary-btn" type="submit">Add Transaction</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    /* ============================================================
+       SUPABASE CONFIGURATION & BACKEND INTEGRATION
+       ============================================================ */
+
+    let sb = null; // Supabase auth client (data goes through our /api backend)
+    const BACKEND_READY = (async () => {
+        try {
+            const r = await fetch("/api/config");
+            const c = r.ok ? await r.json() : null;
+            if (c && c.url && c.key && window.supabase) sb = window.supabase.createClient(c.url, c.key);
+        } catch (e) { console.warn("No backend found, running in demo mode.", e); }
+    })();
+
+    async function api(path, o = {}) {
+        if (!sb) return { data: null, error: { message: "Backend offline" } };
+        try {
+            const { data: { session } } = await sb.auth.getSession();
+            const r = await fetch(path, { method: o.method || "GET",
+                headers: { "Content-Type": "application/json", Authorization: "Bearer " + (session?.access_token || "") },
+                body: o.body ? JSON.stringify(o.body) : undefined });
+            const j = await r.json().catch(() => ({}));
+            return r.ok ? { data: j, error: null } : { data: null, error: { message: j.message || "Request failed (" + r.status + ")" } };
+        } catch (e) { return { data: null, error: { message: e.message } }; }
+    }
+
+    let currentRole = "student";
+    let currentUser = null;
+    let sharedResources = [];
+    let transactions = [];
+
+    // Local Memory Arrays
+    let scheduleData = [
+        { time: "10:00 AM", subject: "Engineering Mathematics", room: "Room 204" },
+        { time: "12:00 PM", subject: "Programming in C", room: "Lab 2" },
+        { time: "02:00 PM", subject: "Communication English", room: "Room 103" }
+    ];
+
+    let peerList = [
+        { id: "p1", name: "Rahul Verma", dept: "CSE", year: "3rd Year", tags: ["DSA", "C++", "Algorithms"], resource: "Complete DSA Cheatsheet" },
+        { id: "p2", name: "Ananya Roy", dept: "ECE", year: "2nd Year", tags: ["Circuitry", "MATLAB"], resource: "Digital Logic Gate Summary" },
+        { id: "p3", name: "Sourav Das", dept: "CSE", year: "2nd Year", tags: ["Python", "Web Dev"], resource: "Python Starter Notes" }
+    ];
+
+    let classrooms = [
+        { name: "Room 204", capacity: 60, equipment: ["Projector", "Whiteboard", "AC"] },
+        { name: "Lab 2", capacity: 30, equipment: ["30 PCs", "Projector", "LAN"] }
+    ];
+
+
+    let facultySchedule = [
+        { time: "10:00 AM", subject: "Engineering Mathematics", room: "Room 204" },
+        { time: "12:00 PM", subject: "Programming in C", room: "Lab 2" },
+        { time: "03:00 PM", subject: "Tutorial", room: "Room 103" }
+    ];
+    let roomRequests = [
+        { id: 1, name: "Dr. Mehta", detail: "Room 204 • Extra class • Tomorrow 3 PM", status: "pending" },
+        { id: 2, name: "Prof. Sen", detail: "Lab 2 • Doubt session • Friday 11 AM", status: "pending" }
+    ];
+    let peerYear = "all";
+
+    /* ---------- UTILITIES: escape, toast, theme, local persistence ---------- */
+    function esc(v){return String(v ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+    function toast(msg){const box=document.getElementById("toastBox");if(!box)return;const t=document.createElement("div");t.className="toast";t.textContent=msg;box.appendChild(t);setTimeout(()=>t.remove(),3500);}
+    function applyTheme(t){document.documentElement.dataset.theme=t;const b=document.getElementById("themeBtn");if(b)b.textContent=t==="dark"?"☀️":"🌙";}
+    function toggleTheme(){const t=document.documentElement.dataset.theme==="dark"?"light":"dark";applyTheme(t);try{localStorage.setItem("sc_theme",t)}catch(e){}}
+    const LS_KEYS={scheduleData:()=>scheduleData,peerList:()=>peerList,classrooms:()=>classrooms,transactions:()=>transactions,facultySchedule:()=>facultySchedule,roomRequests:()=>roomRequests,sharedResources:()=>sharedResources};
+    function persist(){try{Object.keys(LS_KEYS).filter(k=>!sb||!['transactions','sharedResources','peerList'].includes(k)).forEach(k=>localStorage.setItem("sc_"+k,JSON.stringify(LS_KEYS[k]())))}catch(e){}}
+    function restore(){try{const g=k=>JSON.parse(localStorage.getItem("sc_"+k)||"null");
+        scheduleData=g("scheduleData")||scheduleData;peerList=g("peerList")||peerList;classrooms=g("classrooms")||classrooms;transactions=g("transactions")||transactions;sharedResources=g("sharedResources")||sharedResources;facultySchedule=g("facultySchedule")||facultySchedule;roomRequests=g("roomRequests")||roomRequests}catch(e){}}
+    restore();
+    window.addEventListener("DOMContentLoaded",()=>applyTheme(document.documentElement.dataset.theme||"light"));
+
+    // Application Lifecycle Initializer
+    window.addEventListener("DOMContentLoaded", async () => {
+        await BACKEND_READY;
+        if (sb) {
+            let session = null; try { ({ data: { session } } = await sb.auth.getSession()); } catch (e) { console.warn("Session check failed", e); }
+            if (session) {
+                await loadUserProfile(session.user.id);
+                openApplication();
+                return;
+            }
+        }
+        renderSchedule();
+        renderPeers();
+        renderClassrooms();
+    });
+
+    /* ------------------------------------------------------------
+       AUTHENTICATION
+       ------------------------------------------------------------ */
+
+    function showLogin() {
+        document.getElementById("loginForm").style.display = "block";
+        document.getElementById("registerForm").style.display = "none";
+        document.getElementById("loginTab").classList.add("active");
+        document.getElementById("registerTab").classList.remove("active");
+        document.getElementById("authTitle").textContent = "Welcome Back";
+        document.getElementById("authSubtitle").textContent = "Login to your SmartCampus account";
+        clearAuthMessage();
+    }
+
+    function showRegister() {
+        document.getElementById("loginForm").style.display = "none";
+        document.getElementById("registerForm").style.display = "block";
+        document.getElementById("loginTab").classList.remove("active");
+        document.getElementById("registerTab").classList.add("active");
+        document.getElementById("authTitle").textContent = "Create Account";
+        document.getElementById("authSubtitle").textContent = "Register for SmartCampus";
+        clearAuthMessage();
+    }
+
+    function selectRole(role) {
+        currentRole = role;
+        document.getElementById("studentRole").classList.toggle("active", role === "student");
+        document.getElementById("facultyRole").classList.toggle("active", role === "faculty");
+    }
+
+    async function registerUser(event) {
+        event.preventDefault();
+        const email = document.getElementById("regEmail").value.trim();
+        const password = document.getElementById("regPassword").value;
+        const name = document.getElementById("regName").value.trim();
+        const collegeId = document.getElementById("regCollegeId").value.trim();
+        const department = document.getElementById("regDepartment").value;
+        const year = document.getElementById("regYear").value;
+
+        if (!sb) {
+            currentUser = { id: Date.now(), name, collegeId, email, department, year, role: currentRole };
+            openApplication();
+            return;
+        }
+
+        const { data: authData, error: authError } = await sb.auth.signUp({ email, password });
+        if (authError) return showMessage(authError.message, "error");
+
+        if (!authData.session) { return showMessage("Account created! Check your email to confirm, then log in.", "success"); }
+        if (authData.user) {
+            const { error: profileError } = await api('/api/profile', { method: 'POST', body: {
+                id: authData.user.id,
+                email: email,
+                full_name: name,
+                college_id: collegeId,
+                department: department,
+                academic_year: year,
+                role: currentRole
+            } });
+
+            if (profileError) {
+                showMessage(profileError.message, "error");
+            } else {
+                showMessage("Registration successful! Logging you in...", "success");
+                await loadUserProfile(authData.user.id);
+                setTimeout(openApplication, 1000);
+            }
+        }
+    }
+
+    async function login(event) {
+        event.preventDefault();
+        const loginId = document.getElementById("loginId").value.trim();
+        const password = document.getElementById("loginPassword").value;
+
+        if (!sb) {
+            currentUser = { id: 1, name: loginId.split("@")[0].replace(/[._-]+/g, " ").replace(/\b\w/g, c => c.toUpperCase()) || (currentRole === "faculty" ? "Faculty Member" : "Student User"), collegeId: "SUIIT2026", email: loginId, department: "CSE", year: "1st Year", role: currentRole };
+            openApplication();
+            return;
+        }
+
+        const { data, error } = await sb.auth.signInWithPassword({ email: loginId, password });
+        if (error) return showMessage(error.message, "error");
+
+        await loadUserProfile(data.user.id);
+        if (currentUser && currentUser.role !== currentRole) toast("This is a " + currentUser.role + " account, opening the " + currentUser.role + " dashboard.");
+        openApplication();
+    }
+
+    async function loadUserProfile(userId) {
+        if (!sb) return;
+        const { data, error } = await api('/api/profile');
+        if (!error && data) {
+            currentUser = {
+                id: data.id,
+                name: data.full_name,
+                collegeId: data.college_id,
+                email: data.email,
+                department: data.department,
+                year: data.academic_year,
+                role: data.role
+            };
+        }
+    }
+
+    async function logout() {
+        if (sb) await sb.auth.signOut();
+        currentUser = null;
+        document.getElementById("app").style.display = "none";
+        document.getElementById("authScreen").style.display = "flex";
+        document.getElementById("loginForm").reset();
+        showLogin();
+    }
+
+    function showMessage(message, type) {
+        const box = document.getElementById("authMessage");
+        box.textContent = message;
+        box.className = "auth-message " + type;
+    }
+
+    function clearAuthMessage() {
+        const box = document.getElementById("authMessage");
+        box.textContent = "";
+        box.className = "auth-message";
+    }
+
+    /* ------------------------------------------------------------
+       APPLICATION STATE & WORKFLOWS
+       ------------------------------------------------------------ */
+
+    async function openApplication() {
+        document.getElementById("authScreen").style.display = "none";
+        document.getElementById("app").style.display = "block";
+
+        updateUserInterface();
+        await fetchSharedResources();
+        await fetchTransactions();
+        await fetchPeers();
+        renderSchedule();
+        renderPeers();
+        renderClassrooms();
+        renderFaculty();
+    }
+
+    function updateUserInterface() {
+        if (!currentUser) {
+            currentUser = { name: "Student", collegeId: "SUIIT001", email: "student@suiit.ac.in", department: "CSE", year: "1st Year", role: currentRole };
+        }
+        const name = currentUser.name || "User";
+        const initials = name.split(" ").map(w => w[0]).join("").substring(0, 2).toUpperCase();
+
+        document.getElementById("welcomeName").textContent = name.split(" ")[0];
+        const fw = document.getElementById("facultyWelcomeName"); if (fw) fw.textContent = name.split(" ")[0];
+        const h = new Date().getHours(), greeting = h < 12 ? "Good morning" : h < 17 ? "Good afternoon" : "Good evening";
+        document.querySelectorAll(".greet").forEach(g => g.textContent = greeting);
+        document.getElementById("topUserName").textContent = name;
+        document.getElementById("topAvatar").textContent = initials;
+        document.getElementById("profileAvatar").textContent = initials;
+        document.getElementById("profileName").textContent = name;
+        document.getElementById("profileRole").textContent = currentUser.role === "faculty" ? "Faculty" : "Student";
+        document.getElementById("profileCollegeId").textContent = currentUser.collegeId || "—";
+        document.getElementById("profileEmail").textContent = currentUser.email || "—";
+        document.getElementById("profileDepartment").textContent = currentUser.department || "—";
+        document.getElementById("profileYear").textContent = currentUser.year || "—";
+
+        const isFaculty = currentUser.role === "faculty";
+        const yr = document.getElementById("profileYear"); if (yr && yr.parentElement) yr.parentElement.style.display = isFaculty ? "none" : "";
+        document.getElementById("studentMenu").style.display = isFaculty ? "none" : "block";
+        document.getElementById("facultyMenu").style.display = isFaculty ? "block" : "none";
+
+        const bd=document.getElementById("syncBadge"); if(bd){bd.textContent=sb?"● Cloud connected":"Demo mode (local)";bd.classList.toggle("live",!!sb);}
+        navigate(isFaculty ? "facultyHome" : "home");
+    }
+
+    function toggleNotifications() {
+        document.getElementById("notificationPanel").classList.toggle("show");
+    }
+
+    function showLocation(name) {
+        const locs = {
+            'Academic Block': 'Houses Computer Science, Electronics, and Basic Science Lecture Halls.',
+            'Central Library': 'Over 25,000 prints, open access e-journals, and silent study zones.',
+            'Admin Block': 'Fee payment collection, admissions desks, and Registrar offices.',
+            'Hostel': 'Residential blocks with Wi-Fi, dining, and recreational rooms.',
+            'Canteen': 'Fresh meals, soft beverages, and daily cafeteria choices.',
+            'Sports Complex': 'Badminton courts, gym, ground, and indoor table games.'
+        };
+        document.getElementById("locationTitle").textContent = name;
+        document.getElementById("locationDescription").textContent = locs[name] || 'Campus Location Details';
+        document.getElementById("locationModal").classList.add("show");
+    }
+
+    /* ------------------------------------------------------------
+       ACADEMICS MODULE
+       ------------------------------------------------------------ */
+
+    function renderSchedule() {
+        const container = document.getElementById("fullSchedule");
+        if (!container) return;
+        container.innerHTML = scheduleData.map(item => `
+            <div class="schedule-item">
+                <div class="schedule-time">${esc(item.time)}</div>
+                <div><div class="schedule-subject">${esc(item.subject)}</div></div>
+                <div class="schedule-room">${esc(item.room)}</div>
+            </div>
+        `).join("");
+        document.getElementById("statClasses").textContent = scheduleData.length;
+    }
+
+    function openAddClassModal() {
+        document.getElementById("classModal").classList.add("show");
+    }
+
+    function addClass(event) {
+        event.preventDefault();
+        const subject = document.getElementById("newSubject").value;
+        const time = document.getElementById("newTime").value;
+        const room = document.getElementById("newRoom").value;
+
+        scheduleData.push({ time, subject, room });
+        renderSchedule();
+        closeModal("classModal");
+        event.target.reset();
+    }
+
+    /* ------------------------------------------------------------
+       PEER GUIDANCE MODULE
+       ------------------------------------------------------------ */
+
+    function canDeletePeer(p) { return currentUser?.role === "faculty" || (p.user_id && p.user_id === currentUser?.id); }
+
+    function renderPeers() {
+        const grid = document.getElementById("peerGrid");
+        if (!grid) return;
+        const q = (document.getElementById("peerSearch")?.value || "").toLowerCase();
+        const list = peerList.filter(p => (peerYear === "all" || p.year === peerYear) &&
+            [p.name, p.dept, p.year, p.contact, p.resource, ...(p.tags || [])].join(" ").toLowerCase().includes(q));
+        grid.innerHTML = list.length ? list.map(p => `
+            <div class="card peer-card">
+                <div class="peer-avatar">${esc((p.name || "?")[0])}</div>
+                <div class="peer-info">
+                    <h4>${esc(p.name)}<span class="year-badge">${esc(p.year || "")}</span></h4>
+                    <p>${esc(p.dept)}${p.contact ? " · " + esc(p.contact) : ""}</p>
+                    ${p.resource ? `<div class="peer-res">📘 ${esc(p.resource)}</div>` : ""}
+                    <div>${(p.tags || []).map(t => `<span class="tag">${esc(t)}</span>`).join("")}</div>
+                </div>
+                <div class="peer-actions">
+                    <button class="connect-btn" data-n="${esc(p.name)}" onclick="toast('Connect request sent to '+this.dataset.n)">Connect</button>
+                    ${canDeletePeer(p) ? `<button class="peer-del" onclick="removePeer('${esc(String(p.id))}')">Remove</button>` : ""}
+                </div>
+            </div>`).join("") : '<div class="resource-empty">👥 No students found. Use “Add Student” to add one.</div>';
+        document.getElementById("statPeerResources").textContent = peerList.length;
+    }
+
+    function setPeerYear(y, btn) {
+        peerYear = y;
+        document.querySelectorAll("#peerYearChips .chip").forEach(c => c.classList.toggle("active", c === btn));
+        renderPeers();
+    }
+
+    async function fetchPeers() {
+        if (!sb) return;
+        const { data, error } = await api("/api/peers");
+        if (!error && data && data.length) peerList = data;
+    }
+
+    async function savePeer(row) {
+        if (sb) {
+            const { error } = await api("/api/peers", { method: "POST", body: row });
+            if (error) { toast(error.message); return false; }
+            await fetchPeers();
+        } else {
+            peerList.unshift({ ...row, id: "l" + Date.now(), user_id: currentUser?.id });
+        }
+        renderPeers();
+        return true;
+    }
+
+    async function removePeer(id) {
+        if (!confirm("Remove this student from Peer Guidance?")) return;
+        if (sb) {
+            const { error } = await api("/api/peers/" + encodeURIComponent(id), { method: "DELETE" });
+            if (error) return toast(error.message);
+            await fetchPeers();
+            peerList = peerList.filter(p => String(p.id) !== String(id));
+        } else peerList = peerList.filter(p => String(p.id) !== String(id));
+        renderPeers();
+        toast("Student removed");
+    }
+
+    function openAddPeerModal() { document.getElementById("addPeerModal").classList.add("show"); }
+
+    async function addPeerStudent(event) {
+        event.preventDefault();
+        const v = id => document.getElementById(id).value.trim();
+        const row = { name: v("peerName"), dept: v("peerDept").toUpperCase(), year: document.getElementById("peerYear").value,
+            tags: v("peerSkills").split(",").map(t => t.trim()).filter(Boolean).slice(0, 6),
+            resource: v("peerResourceTitle"), contact: v("peerContact") };
+        if (!row.tags.length) row.tags = ["General"];
+        if (await savePeer(row)) { closeModal("addPeerModal"); event.target.reset(); toast(row.name + " added to Peer Guidance"); }
+    }
+
+    function searchPeers() {
+        renderPeers();
+    }
+
+    function openPeerModal() {
+        document.getElementById("peerModal").classList.add("show");
+    }
+
+    async function addResource(event) {
+        event.preventDefault();
+        const title = document.getElementById("resourceTitle").value.trim();
+        const cat = document.getElementById("resourceCategoryInput").value.trim();
+        const ok = await savePeer({ name: currentUser?.name || "Peer", dept: currentUser?.department || "Student",
+            year: currentUser?.year || "", tags: [cat], resource: title, contact: "" });
+        if (ok) { closeModal("peerModal"); event.target.reset(); toast("Resource shared"); }
+    }
+
+    /* ------------------------------------------------------------
+       SHARED RESOURCE HUB
+       ------------------------------------------------------------ */
+
+    async function fetchSharedResources() {
+        if (!sb) return;
+        const { data, error } = await api('/api/resources');
+        if (!error && data) {
+            sharedResources = data;
+            renderSharedResources();
+        }
+    }
+
+    function renderSharedResources() {
+        const grid = document.getElementById("sharedResourceGrid");
+        if (!grid) return;
+        const search = (document.getElementById("resourceSearch")?.value || "").toLowerCase().trim();
+        const category = document.getElementById("resourceCategory")?.value || "all";
+
+        const list = sharedResources.filter(r => 
+            (category === "all" || r.category === category) &&
+            (!search || [r.title, r.subject, r.author, r.description].join(" ").toLowerCase().includes(search))
+        );
+
+        if (!list.length) {
+            grid.innerHTML = '<div class="resource-empty">📭 No matching resources found.</div>';
+            return;
+        }
+
+        grid.innerHTML = list.map(r => `
+            <article class="shared-resource-card">
+                <div><span class="badge badge-green">${esc(r.category)}</span></div>
+                <h4>${esc(r.title)}</h4>
+                <p>${esc(r.description || "No description provided.")}</p>
+                <div class="resource-meta">
+                    <span>📘 ${esc(r.subject)}</span>
+                    <span>🎓 ${esc(r.semester || "All")}</span>
+                    <span>👥 ${esc(r.branch || "All")}</span>
+                    <span>👤 ${esc(r.author)} · ${esc(r.role)}</span>
+                </div>
+                <div class="resource-card-bottom">
+                    <small style="color:var(--muted);">Shared with ${esc(r.visibility)}</small>
+                    <div class="resource-actions">
+                        <button class="secondary-btn" onclick="openSharedResource('${r.id}')">${r.link ? "Open" : "View"}</button>
+                        ${(currentUser?.role === "faculty" || r.user_id === currentUser?.id) ? `<button class="secondary-btn" onclick="deleteSharedResource('${r.id}')">Delete</button>` : ""}
+                    </div>
+                </div>
+            </article>
+        `).join("");
+    }
+
+    async function addSharedResource(event) {
+        event.preventDefault();
+        const role = currentUser?.role === "faculty" ? "Faculty" : "Student";
+        const resourceData = {
+            user_id: currentUser?.id || "demo",
+            title: document.getElementById("sharedTitle").value.trim(),
+            category: document.getElementById("sharedCategory").value,
+            subject: document.getElementById("sharedSubject").value.trim(),
+            semester: document.getElementById("sharedSemester").value.trim() || "All",
+            branch: document.getElementById("sharedBranch").value.trim() || "All",
+            description: document.getElementById("sharedDescription").value.trim(),
+            author: currentUser?.name || "SmartCampus User",
+            role: role,
+            visibility: document.getElementById("sharedVisibility").value,
+            link: document.getElementById("sharedLink").value.trim()
+        };
+
+        if (sb) {
+            const { error } = await api('/api/resources', { method: 'POST', body: resourceData });
+            if (error) return toast(error.message);
+        } else {
+            sharedResources.unshift({ ...resourceData, id: Date.now() });
+        }
+
+        event.target.reset();
+        document.getElementById("resourceUpload").open = false;
+        await fetchSharedResources();
+        renderSharedResources();
+        toast("Resource shared successfully!");
+    }
+
+    async function deleteSharedResource(id) {
+        if (!confirm("Are you sure you want to delete this resource?")) return;
+        if (sb) {
+            const { error } = await api('/api/resources/' + encodeURIComponent(id), { method: 'DELETE' });
+            if (error) toast(error.message); else { toast('Resource deleted'); await fetchSharedResources(); }
+        } else {
+            sharedResources = sharedResources.filter(r => String(r.id) !== String(id));
+            renderSharedResources();
+        }
+    }
+
+    function openSharedResource(id) {
+        const r = sharedResources.find(x => String(x.id) === String(id));
+        if (!r) return;
+        if (r.link) window.open(r.link, "_blank", "noopener,noreferrer");
+        else toast(`${esc(r.title)}\n\nSubject: ${esc(r.subject)}\nCategory: ${esc(r.category)}\nAuthor: ${esc(r.author)}\n\n${r.description}`);
+    }
+
+    /* ------------------------------------------------------------
+       FINANCE MODULE
+       ------------------------------------------------------------ */
+
+    async function fetchTransactions() {
+        if (!currentUser) return;
+        if (sb) {
+            const { data, error } = await api('/api/transactions');
+            if (!error && data) transactions = data;
+        }
+        renderTransactions();
+    }
+
+    function renderTransactions() {
+        const container = document.getElementById("transactionList");
+        if (!container) return;
+        container.innerHTML = "";
+
+        let balance = 2450;
+        let expenses = 0;
+        let income = 0;
+
+        transactions.forEach(t => {
+            if (t.type === "income") {
+                balance += Number(t.amount);
+                income += Number(t.amount);
+            } else {
+                balance -= Number(t.amount);
+                expenses += Number(t.amount);
+            }
+
+            const div = document.createElement("div");
+            div.className = "transaction";
+            div.innerHTML = `
+                <div class="transaction-left">
+                    <div class="transaction-icon">${t.type === "income" ? "💵" : "🛒"}</div>
+                    <div>
+                        <strong>${esc(t.title)}</strong>
+                        <small>${t.created_at ? new Date(t.created_at).toLocaleDateString() : 'Today'}</small>
+                    </div>
+                </div>
+                <div class="${t.type === "income" ? "income" : "expense"}">
+                    ${t.type === "income" ? "+" : "-"}₹${t.amount}
+                </div>
+            `;
+            container.appendChild(div);
+        });
+
+        document.getElementById("financeBalance").textContent = `₹${balance}`;
+        document.getElementById("statBalance").textContent = `₹${balance}`;
+        document.getElementById("financeExpenses").textContent = `₹${expenses}`;
+        document.getElementById("financeSavings").textContent = `₹${income}`;
+    }
+
+    async function addTransaction(event) {
+        event.preventDefault();
+        const description = document.getElementById("transactionDescription").value;
+        const amount = Number(document.getElementById("transactionAmount").value);
+        const type = document.getElementById("transactionType").value;
+
+        const newTrans = {
+            user_id: currentUser?.id,
+            title: description,
+            amount: amount,
+            type: type,
+            created_at: new Date().toISOString()
+        };
+
+        if (sb) {
+            const { error } = await api('/api/transactions', { method: 'POST', body: newTrans });
+            if (error) return toast(error.message);
+        } else {
+            transactions.unshift(newTrans);
+        }
+
+        closeModal("transactionModal");
+        event.target.reset();
+        await fetchTransactions();
+    }
+
+    /* ------------------------------------------------------------
+       WELLBEING MODULE
+       ------------------------------------------------------------ */
+
+    function selectMood(btn, mood) {
+        document.querySelectorAll(".mood").forEach(b => b.classList.remove("selected"));
+        btn.classList.add("selected");
+        document.getElementById("moodMessage").textContent = `Selected: ${mood}. Take care of yourself!`;
+    }
+
+    function showSupportMessage() {
+        toast("Campus Student Helpline: +91 1800-SMART-CAMPUS\nSupport Office: Block A Room 102");
+    }
+
+    /* ------------------------------------------------------------
+       FACULTY & CLASSROOMS MODULE
+       ------------------------------------------------------------ */
+
+    function renderFaculty() {
+        const today = document.getElementById("facultyTodayList");
+        if (!today) return;
+        const row = i => `<div class="schedule-item"><div class="schedule-time">${esc(i.time)}</div><div><div class="schedule-subject">${esc(i.subject)}</div></div><div class="schedule-room">${esc(i.room)}</div></div>`;
+        const html = facultySchedule.map(row).join("") || '<div class="resource-empty">No classes scheduled</div>';
+        today.innerHTML = html;
+        document.getElementById("facultyTimetableList").innerHTML = html;
+        document.getElementById("facClasses").textContent = facultySchedule.length;
+        document.getElementById("facRequests").textContent = roomRequests.filter(r => r.status === "pending").length;
+        document.getElementById("facRooms").textContent = classrooms.length;
+        document.getElementById("roomRequestList").innerHTML = roomRequests.map(r => `
+            <div class="request-row"><div><strong>${esc(r.name)}</strong><p style="color:var(--muted);font-size:12px;margin-top:4px;">${esc(r.detail)}</p></div>
+            ${r.status === "pending"
+                ? `<div class="faculty-action"><button class="primary-btn" onclick="handleRoomRequest(${r.id},'approved')">Accept</button><button class="secondary-btn" onclick="handleRoomRequest(${r.id},'declined')">Decline</button></div>`
+                : `<span class="status-pill status-${r.status}">${r.status === "approved" ? "Approved" : "Declined"}</span>`}</div>`).join("") || '<div class="resource-empty">No requests</div>';
+    }
+
+    function handleRoomRequest(id, status) {
+        const r = roomRequests.find(x => x.id === id);
+        if (!r) return;
+        r.status = status;
+        renderFaculty();
+        toast("Request from " + r.name + " " + status);
+    }
+
+
+    function submitExtraClass(e) {
+        e.preventDefault();
+        const subj = document.getElementById("extraSubject").value;
+        const room = document.getElementById("extraRoom").value || "Room 204";
+        document.getElementById("extraClassResult").innerHTML = `
+            <div class="card" style="border-left: 4px solid var(--success);">
+                <strong>Room Approved!</strong>
+                <p style="color:var(--muted);font-size:13px;margin-top:4px;">${esc(subj)} scheduled at ${room}.</p>
+            </div>
+        `;
+    }
+
+    function renderClassrooms() {
+        const grid = document.getElementById("classroomGrid");
+        if (!grid) return;
+        grid.innerHTML = classrooms.map(c => `
+            <div class="card room-card">
+                <h4>${esc(c.name)}</h4>
+                <div class="room-meta">Capacity: ${c.capacity} students</div>
+                <div class="room-tags">${c.equipment.map(e => `<span class="room-tag">${esc(e)}</span>`).join("")}</div>
+            </div>
+        `).join("");
+    }
+
+    function openClassroomModal() { document.getElementById("classroomModal").classList.add("show"); }
+
+    function addClassroom(event) {
+        event.preventDefault();
+        const equipment = document.getElementById("roomEquip").value.split(",").map(x => x.trim()).filter(Boolean);
+        classrooms.push({ name: document.getElementById("roomName").value.trim(), capacity: Number(document.getElementById("roomCap").value), equipment: equipment.length ? equipment : ["Standard Amenities"] });
+        renderClassrooms(); renderFaculty();
+        closeModal("classroomModal"); event.target.reset(); toast("Classroom added");
+    }
+
+    /* ------------------------------------------------------------
+       NAVIGATION & HELPER UTILITIES
+       ------------------------------------------------------------ */
+
+    function navigate(pageName, clickedButton) {
+        document.querySelectorAll(".page").forEach(page => page.classList.remove("active"));
+        const page = document.getElementById("page-" + pageName);
+        if (page) page.classList.add("active");
+
+        const titles = {
+            home: ["Dashboard", "Your campus at a glance"],
+            map: ["Campus Map", "Navigate campus structures"],
+            academics: ["Academics", "Your class schedules"],
+            peers: ["Peer Guidance", "Learn from experienced peers"],
+            resources: ["Resource Hub", "Shared academic assets"],
+            finance: ["Finance", "Student wallet & transactions"],
+            wellbeing: ["Wellbeing", "Track mood & stay healthy"],
+            profile: ["Profile", "Personal campus identity"],
+            facultyHome: ["Faculty Dashboard", "Overview and room requests"],
+            facultyAcademics: ["My Timetable", "Teaching schedule"],
+            extraClass: ["Extra Class", "Book additional lecture slots"],
+            classrooms: ["Classroom Details", "Manage venue capacity"]
+        };
+
+        if (titles[pageName]) {
+            document.getElementById("pageTitle").textContent = titles[pageName][0];
+            document.getElementById("pageSubtitle").textContent = titles[pageName][1];
+        }
+
+        if (pageName === "resources") renderSharedResources();
+
+        document.querySelectorAll(".sidebar-menu button").forEach(btn => btn.classList.remove("active"));
+        if (clickedButton) clickedButton.classList.add("active");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    ["renderFaculty","renderSchedule","renderPeers","renderClassrooms","renderTransactions","renderSharedResources"].forEach(n=>{const f=window[n];window[n]=function(){const r=f.apply(this,arguments);persist();return r;};});
+    const _sx = window.submitExtraClass;
+    window.submitExtraClass = function (e) {
+        const d = document.getElementById("extraDate").value, t = document.getElementById("extraTime").value;
+        const subj = document.getElementById("extraSubject").value, room = document.getElementById("extraRoom").value || "Room 204";
+        _sx(e);
+        const [hh, mm] = (t || "00:00").split(":").map(Number);
+        facultySchedule.push({ time: (d ? d.slice(5) + " · " : "") + ((hh % 12) || 12) + ":" + String(mm).padStart(2, "0") + (hh < 12 ? " AM" : " PM"), subject: subj, room });
+        renderFaculty();
+    };
+    function navigateByName(pageName) { navigate(pageName); }
+    function closeModal(modalId) { document.getElementById(modalId).classList.remove("show"); }
+    function openTransactionModal() { document.getElementById("transactionModal").classList.add("show"); }
+</script>
+</body>
+</html>
